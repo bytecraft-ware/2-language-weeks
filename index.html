@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Қоғамдық-гуманитарлық пәндер декадасы | ОНКҮНДІК ЖОСПАРЫ (16–27 қараша 2026)</title>
+    
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключение шрифта Inter и Playfair Display для академического стиля -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Иконки Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Библиотека QRious для генерации QR-кода на лету без сторонних картинок -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            850: '#064e3b',
+                            950: '#022c22',
+                        },
+                        gold: {
+                            50: '#fbf8f1',
+                            100: '#f5eedc',
+                            200: '#eadab8',
+                            300: '#ddc08b',
+                            400: '#cfa25c',
+                            500: '#c3883b',
+                            600: '#a86c2d',
+                            700: '#8a5226',
+                        },
+                        slate: {
+                            850: '#172033',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Кастомные скроллбары для горизонтальных фильтров на мобильных */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Декоративный казахский геометрический паттерн для шапки */
+        .academic-pattern {
+            background-color: #043927;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(195, 136, 59, 0.18) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c3883b' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Стили для печати (window.print) */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 11pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .academic-pattern {
+                background: #f8fafc !important;
+                color: #0f172a !important;
+                border-bottom: 2px solid #043927 !important;
+                padding: 1rem 0 !important;
+            }
+            .academic-pattern h1, .academic-pattern p, .academic-pattern span {
+                color: #0f172a !important;
+            }
+            .event-card {
+                break-inside: avoid;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                margin-bottom: 0.75rem !important;
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+            }
+            th, td {
+                border: 1px solid #94a3b8 !important;
+                padding: 6px 8px !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#F8F7F4] text-slate-800 antialiased selection:bg-emerald-800 selection:text-white min-h-screen flex flex-col">
+
+    <!-- Уведомление (Toast) вместо alert() -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Шапка сайта (Hero Header) -->
+    <header class="academic-pattern text-white relative overflow-hidden shadow-xl">
+        <!-- Верхняя декоративная золотая полоса -->
+        <div class="h-1.5 w-full bg-gradient-to-r from-gold-600 via-gold-300 to-gold-600"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
+            <!-- Верхняя панель действий -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-white/15 no-print">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-gold-400/30 text-gold-200 text-xs sm:text-sm font-medium">
+                    <i data-lucide="calendar-range" class="w-4 h-4 text-gold-300"></i>
+                    <span>2026 жылғы 16–27 қараша</span>
+                </div>
+
+                <!-- Кнопки расшаривания, QR и печати -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="copyShareLink()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white text-xs sm:text-sm font-medium transition border border-white/15 cursor-pointer" title="Сілтемені көшіру">
+                        <i data-lucide="link" class="w-4 h-4 text-gold-300"></i>
+                        <span>Сілтемені көшіру</span>
+                    </button>
+                    <button onclick="openQrModal()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 active:scale-95 text-slate-950 text-xs sm:text-sm font-semibold transition shadow-md cursor-pointer" title="QR-кодты ашу">
+                        <i data-lucide="qr-code" class="w-4 h-4"></i>
+                        <span>QR-код</span>
+                    </button>
+                    <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white text-xs sm:text-sm font-medium transition border border-white/15 cursor-pointer" title="Кестені басып шығару">
+                        <i data-lucide="printer" class="w-4 h-4 text-emerald-300"></i>
+                        <span class="hidden sm:inline">Басып шығару</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Главный заголовок и статистика -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-3">
+                    <div class="flex items-center gap-2 text-gold-300 font-semibold tracking-wider uppercase text-xs sm:text-sm">
+                        <i data-lucide="book-open-check" class="w-4 h-4"></i>
+                        <span>ОНКҮНДІК ЖОСПАРЫ • ӘДІСТЕМЕЛІК БІРЛЕСТІК</span>
+                    </div>
+                    <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+                        Қоғамдық-гуманитарлық пәндер декадасы
+                    </h1>
+                    <p class="text-emerald-100/90 text-sm sm:text-base max-w-2xl leading-relaxed">
+                        Тарих, қазақ, орыс және ағылшын тілдері мен әдебиеті пәндері бойынша танымдық ойындар, подкасттар, зияткерлік сайыстар және ашық сабақтардың бірыңғай интерактивті кестесі.
+                    </p>
+                </div>
+
+                <!-- Карточки статистики -->
+                <div class="lg:col-span-4 grid grid-cols-3 gap-2.5 sm:gap-3">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 sm:p-4 text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-gold-300">24</div>
+                        <div class="text-[11px] sm:text-xs text-emerald-100 mt-1 font-medium">Іс-шара</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 sm:p-4 text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-white">10</div>
+                        <div class="text-[11px] sm:text-xs text-emerald-100 mt-1 font-medium">Оқу күні</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3.5 sm:p-4 text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-300">3–11</div>
+                        <div class="text-[11px] sm:text-xs text-emerald-100 mt-1 font-medium">Сыныптар</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow">
+        
+        <!-- Панель поиска и фильтров -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 sm:p-6 mb-6 space-y-5 no-print">
+            
+            <!-- Верхняя строка: Поиск + Переключатель вида + Сброс -->
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+                <!-- Поле поиска -->
+                <div class="relative flex-grow">
+                    <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Іс-шара атауы, кабинет (мысалы: 309, Мәжіліс залы) немесе мұғалім тегі бойынша іздеу..." 
+                        class="w-full pl-11 pr-10 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/70 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700 text-sm transition"
+                    >
+                    <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer" title="Тазарту">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Переключатель вида (Карточки / Таблица) и кнопка сброса -->
+                <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0">
+                    <button id="reset-filters-btn" onclick="resetAllFilters()" class="hidden inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 transition cursor-pointer">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <span>Сүзгіні тазарту</span>
+                    </button>
+
+                    <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200/70">
+                        <button id="view-cards-btn" onclick="setViewMode('cards')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white text-emerald-900 shadow-sm transition cursor-pointer">
+                            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                            <span>Карточкалар</span>
+                        </button>
+                        <button id="view-table-btn" onclick="setViewMode('table')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                            <i data-lucide="table-2" class="w-4 h-4"></i>
+                            <span>Кесте</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фильтр 1: По дате -->
+            <div>
+                <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-700"></i>
+                    <span>Күні бойынша таңдау:</span>
+                </div>
+                <div id="date-filters" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                    <!-- Генерируется через JS -->
+                </div>
+            </div>
+
+            <!-- Фильтр 2 и 3: Классы и Ценности -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-3 border-t border-slate-100">
+                <!-- По классам -->
+                <div>
+                    <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                        <i data-lucide="users" class="w-3.5 h-3.5 text-gold-600"></i>
+                        <span>Сыныптар / Қатысушылар:</span>
+                    </div>
+                    <div id="grade-filters" class="flex flex-wrap gap-1.5">
+                        <!-- Генерируется через JS -->
+                    </div>
+                </div>
+
+                <!-- По ценностям -->
+                <div>
+                    <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                        <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-700"></i>
+                        <span>Біртұтас тәрбие құндылықтары:</span>
+                    </div>
+                    <div id="value-filters" class="flex flex-wrap gap-1.5">
+                        <!-- Генерируется через JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Информационная строка о результатах фильтрации -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 px-1">
+            <div class="text-sm text-slate-600">
+                Көрсетілген іс-шаралар саны: <span id="results-count" class="font-bold text-emerald-900 text-base">24</span> <span class="text-slate-400">/ 24</span>
+            </div>
+            <div id="active-filter-summary" class="text-xs text-slate-500 italic"></div>
+        </div>
+
+        <!-- Контейнер для отображения карточек -->
+        <div id="cards-container" class="space-y-8">
+            <!-- Динамически заполняется JS -->
+        </div>
+
+        <!-- Контейнер для отображения таблицы -->
+        <div id="table-container" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-emerald-950 text-white text-xs uppercase tracking-wider">
+                            <th class="py-3.5 px-4 font-semibold w-12">№</th>
+                            <th class="py-3.5 px-4 font-semibold w-36">Күні, уақыты</th>
+                            <th class="py-3.5 px-4 font-semibold">Іс-шара атауы және форматы</th>
+                            <th class="py-3.5 px-4 font-semibold w-44">Сынып, орны</th>
+                            <th class="py-3.5 px-4 font-semibold w-56">Жауапты, құндылық</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-slate-200 text-sm">
+                        <!-- Динамически заполняется JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Состояние "Ничего не найдено" -->
+        <div id="empty-state" class="hidden bg-white rounded-2xl border border-slate-200 p-10 text-center my-6">
+            <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">Іс-шаралар табылмады</h3>
+            <p class="text-sm text-slate-500 max-w-md mx-auto mb-5">
+                Таңдалған сүзгілер немесе іздеу сұранысы бойынша сәйкес келетін іс-шара жоқ. Сүзгілерді өзгертіп көріңіз.
+            </p>
+            <button onclick="resetAllFilters()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-sm font-medium transition cursor-pointer">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                <span>Барлық іс-шараларды көрсету</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-12 border-t border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+            <div class="flex items-center gap-2.5 text-slate-300">
+                <div class="w-8 h-8 rounded-lg bg-emerald-900/80 border border-emerald-700/50 flex items-center justify-center text-gold-300 font-serif font-bold">
+                    ҚГ
+                </div>
+                <div>
+                    <div class="font-semibold text-white">Қоғамдық-гуманитарлық пәндер бірлестігі</div>
+                    <div class="text-xs text-slate-400">Онқүндік жоспары • 2026 жылғы 16–27 қараша</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="copyShareLink()" class="hover:text-gold-300 transition flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span>Бөлісу</span>
+                </button>
+                <button onclick="openQrModal()" class="hover:text-gold-300 transition flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+                    <span>Стендке арналған QR</span>
+                </button>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-white transition flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                    <span>Жоғарыға</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно QR-кода -->
+    <div id="qr-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 backdrop-blur-sm p-4 no-print" onclick="closeQrModalOnBackdrop(event)">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative transform transition-all text-center">
+            <button onclick="closeQrModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer" title="Жабу">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-800 mb-3">
+                <i data-lucide="qr-code" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">Онқүндік жоспарының QR-коды</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1.5 mb-5">
+                Мектеп стендіне басып шығару үшін немесе смартфон камерасымен сканерлеп ашу үшін пайдаланыңыз
+            </p>
+
+            <!-- Блок с QR-кодом -->
+            <div class="bg-gradient-to-b from-slate-50 to-white p-5 rounded-2xl border-2 border-dashed border-gold-400/60 inline-block mx-auto mb-5 shadow-inner">
+                <canvas id="qr-canvas" class="mx-auto rounded-lg"></canvas>
+                <div class="mt-2.5 text-[11px] font-bold tracking-wider uppercase text-emerald-900">
+                    16–27 ҚАРАША 2026 • ОНКҮНДІК
+                </div>
+            </div>
+
+            <!-- Ссылка для просмотра/копирования -->
+            <div class="flex items-center gap-2 bg-slate-100 p-2 rounded-xl border border-slate-200 mb-5">
+                <input type="text" id="qr-url-input" readonly class="bg-transparent text-xs text-slate-600 w-full px-2 focus:outline-none truncate">
+                <button onclick="copyShareLink()" class="shrink-0 px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-medium transition cursor-pointer">
+                    Көшіру
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5">
+                <button onclick="downloadQrCode()" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 text-xs sm:text-sm font-semibold transition cursor-pointer">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>QR жүктеу (PNG)</span>
+                </button>
+                <button onclick="closeQrModal()" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-medium transition cursor-pointer">
+                    <span>Жабу</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Полная база данных всех 24 мероприятий из документа
+        const eventsData = [
+            {
+                id: 1,
+                date: "16.11",
+                dateFull: "16 қараша • Дүйсенбі",
+                time: "7:45 – 7:55",
+                title: "Қоғамдық-гуманитарлық пәндер декадасының салтанатты ашылуы",
+                format: "Салтанатты ашылу рәсімі",
+                gradeDisplay: "5–11 сынып",
+                gradeGroups: ["5-7", "8-9", "10-11"],
+                location: "Мектеп фойесі",
+                responsible: "ӘБ мұғалімдері",
+                values: ["Бірлік және ынтымақ"],
+                isHighlight: true
+            },
+            {
+                id: 2,
+                date: "16.11",
+                dateTextOverride: "16.11 – 27.11",
+                dateFull: "16 қараша • Дүйсенбі (Күн сайын 16.11–27.11)",
+                time: "9:10–9:25; 10:10–10:20; 11:05–11:20",
+                title: "Танымдық белсенді үзілістер",
+                format: "Дәліздік викториналар, блиц-сұхбаттар, танымдық ойындар",
+                gradeDisplay: "5–11 сынып",
+                gradeGroups: ["5-7", "8-9", "10-11"],
+                location: "Мектеп дәліздері",
+                responsible: "ӘБ мұғалімдері",
+                values: ["Жасампаздық және жаңашылдық"],
+                isRecurring: true
+            },
+            {
+                id: 3,
+                date: "16.11",
+                dateFull: "16 қараша • Дүйсенбі",
+                time: "14:00 – 15:00",
+                title: "Жасанды интеллект педагогтің көмекшісі: дидактикалық ойындар құрастыру бойынша практикум",
+                format: "Мектепішілік семинар-практикум",
+                gradeDisplay: "Мектеп мұғалімдері",
+                gradeGroups: ["teachers"],
+                location: "Мәжіліс залы",
+                responsible: "Бектасова Д.Р., Омиржанова К.К.",
+                values: ["Еңбекқорлық және кәсіби біліктілік"]
+            },
+            {
+                id: 4,
+                date: "17.11",
+                dateFull: "17 қараша • Сейсенбі",
+                time: "12:30 – 13:30",
+                title: "Ыбырай Алтынсариннің туғанына 185 жыл",
+                format: "Викториналық ойын",
+                gradeDisplay: "6–7 сынып",
+                gradeGroups: ["5-7"],
+                location: "217 кабинет",
+                responsible: "Сибанбаева Б.А., Шажанканова Б.М.",
+                values: ["Тәуелсіздік және отаншылдық"]
+            },
+            {
+                id: 5,
+                date: "17.11",
+                dateFull: "17 қараша • Сейсенбі",
+                time: "14:00 – 14:30",
+                title: "«Жетістікке жетелеген жігер» подкасты",
+                format: "Подкаст-сұхбат",
+                gradeDisplay: "10 сынып",
+                gradeGroups: ["10-11"],
+                location: "Медиа кабинет",
+                responsible: "Сибанбаева Б.А.",
+                values: ["Жасампаздық және жаңашылдық"]
+            },
+            {
+                id: 6,
+                date: "18.11",
+                dateFull: "18 қараша • Сәрсенбі",
+                time: "12:35 – 13:20",
+                title: "«Манкуртизм — трагедия прошлого или угроза современному человечеству?»",
+                format: "Урок-дебаты",
+                gradeDisplay: "10 сынып",
+                gradeGroups: ["10-11"],
+                location: "309 кабинет",
+                responsible: "Казымбетова А.К., Алинова С.К.",
+                values: ["Әділдік және жауапкершілік"]
+            },
+            {
+                id: 7,
+                date: "18.11",
+                dateFull: "18 қараша • Сәрсенбі",
+                time: "11:45 – 12:30",
+                title: "«Орыс тілі мен әдебиетінің білгірлері»",
+                format: "Интеллектуальный турнир",
+                gradeDisplay: "8 сынып",
+                gradeGroups: ["8-9"],
+                location: "309 кабинет",
+                responsible: "Казымбетова А.К., Алинова С.К.",
+                values: ["Бірлік және ынтымақ"]
+            },
+            {
+                id: 8,
+                date: "18.11",
+                dateFull: "18 қараша • Сәрсенбі",
+                time: "14:00 – 14:30",
+                title: "«ЕРТІС ӨҢІРІНІҢ ҮНДЕРІ»",
+                format: "Әдеби-танымдық подкаст",
+                gradeDisplay: "8 сынып",
+                gradeGroups: ["8-9"],
+                location: "Медиа кабинет",
+                responsible: "Казымбетова А.К.",
+                values: ["Жасампаздық және жаңашылдық"]
+            },
+            {
+                id: 9,
+                date: "19.11",
+                dateFull: "19 қараша • Бейсенбі",
+                time: "13:00 – 14:00",
+                title: "«Think Fast, Speak English!»",
+                format: "Викторина",
+                gradeDisplay: "8–9 сынып",
+                gradeGroups: ["8-9"],
+                location: "Мәжіліс залы",
+                responsible: "Жуманова Н.К.",
+                values: ["Бірлік және ынтымақ"]
+            },
+            {
+                id: 10,
+                date: "19.11",
+                dateFull: "19 қараша • Бейсенбі",
+                time: "14:00 – 15:00",
+                title: "«English Battle: 10 vs 11»",
+                format: "Зияткерлік сайыс",
+                gradeDisplay: "10–11 сынып",
+                gradeGroups: ["10-11"],
+                location: "222 кабинет",
+                responsible: "Магжанова А.О.",
+                values: ["Әділдік және жауапкершілік"]
+            },
+            {
+                id: 11,
+                date: "19.11",
+                dateFull: "19 қараша • Бейсенбі",
+                time: "13:00 – 13:30",
+                title: "«Beyond the Classroom» подкасты",
+                format: "Ағылшын тіліндегі подкаст-сұхбат",
+                gradeDisplay: "9 сынып",
+                gradeGroups: ["8-9"],
+                location: "Медиа кабинет",
+                responsible: "Магжанова А.О.",
+                values: ["Жасампаздық және жаңашылдық"]
+            },
+            {
+                id: 12,
+                date: "20.11",
+                dateFull: "20 қараша • Жұма",
+                time: "12:40 – 13:25",
+                title: "«Тарих білгірлері»",
+                format: "Зияткерлік сайыс",
+                gradeDisplay: "6–7 сынып",
+                gradeGroups: ["5-7"],
+                location: "209 кабинет",
+                responsible: "Ахметбекова А.С., Каламова А.М., Есенғали Д.Қ.",
+                values: ["Тәуелсіздік және отаншылдық"]
+            },
+            {
+                id: 13,
+                date: "20.11",
+                dateFull: "20 қараша • Жұма",
+                time: "9:45 – 10:30",
+                title: "Облыстық әдістемелік десант: ашық сабақ «A blog entry about your favorite singer»",
+                format: "Ашық сабақ, 5Б сынып",
+                gradeDisplay: "5Б сынып",
+                gradeGroups: ["5-7"],
+                location: "309 кабинет",
+                responsible: "Омиржанова К.К.",
+                values: ["Еңбекқорлық және кәсіби біліктілік"]
+            },
+            {
+                id: 14,
+                date: "20.11",
+                dateFull: "20 қараша • Жұма",
+                time: "10:45 – 11:30",
+                title: "Облыстық әдістемелік десант: ашық сабақ «My Hobby»",
+                format: "Ашық сабақ, 4Д сынып",
+                gradeDisplay: "4Д сынып",
+                gradeGroups: ["3-4"],
+                location: "224 кабинет",
+                responsible: "Бектасова Д.Р.",
+                values: ["Еңбекқорлық және кәсіби біліктілік"]
+            },
+            {
+                id: 15,
+                date: "23.11",
+                dateFull: "23 қараша • Дүйсенбі",
+                time: "14:00 – 15:00",
+                title: "Мұқағали Мақатаевтың туғанына 95 жыл",
+                format: "Мәнерлеп оқу байқауы",
+                gradeDisplay: "8–10 сынып",
+                gradeGroups: ["8-9", "10-11"],
+                location: "Кітапхана",
+                responsible: "Сибанбаева Б.А., Шажанканова Б.М.",
+                values: ["Тәуелсіздік және отаншылдық"]
+            },
+            {
+                id: 16,
+                date: "24.11",
+                dateFull: "24 қараша • Сейсенбі",
+                time: "10:45 – 11:30",
+                title: "«Четыре матери - четыре духовные опоры народа» (по произведению Мухтара Шаханова «Четыре матери»)",
+                format: "Литературный баттл",
+                gradeDisplay: "9 сынып",
+                gradeGroups: ["8-9"],
+                location: "309 кабинет",
+                responsible: "Алинова С.К., Казымбетова А.К.",
+                values: ["Бірлік және ынтымақ"]
+            },
+            {
+                id: 17,
+                date: "24.11",
+                dateFull: "24 қараша • Сейсенбі",
+                time: "11:45 – 12:30",
+                title: "«Литературный переполох»",
+                format: "Интеллектуально-развлекательная игра",
+                gradeDisplay: "5 сынып",
+                gradeGroups: ["5-7"],
+                location: "309 кабинет",
+                responsible: "Смагулова А.С., Нуржанова Р.М.",
+                values: ["Жасампаздық және жаңашылдық"]
+            },
+            {
+                id: 18,
+                date: "24.11",
+                dateFull: "24 қараша • Сейсенбі",
+                time: "8:00 – 12:30 (сабақ кестесіне сәйкес)",
+                title: "«Единый диктант»",
+                format: "Диктант",
+                gradeDisplay: "4 сынып",
+                gradeGroups: ["3-4"],
+                location: "Бастауыш сынып кабинеттері",
+                responsible: "Нуржанова Р.М.",
+                values: ["Әділдік және жауапкершілік"]
+            },
+            {
+                id: 19,
+                date: "25.11",
+                dateFull: "25 қараша • Сәрсенбі",
+                time: "13:00 – 14:00",
+                title: "«Spelling Bee»",
+                format: "Әріптер сайысы",
+                gradeDisplay: "6 сынып",
+                gradeGroups: ["5-7"],
+                location: "224 кабинет",
+                responsible: "Бектасова Д.Р.",
+                values: ["Еңбекқорлық және кәсіби біліктілік"]
+            },
+            {
+                id: 20,
+                date: "25.11",
+                dateFull: "25 қараша • Сәрсенбі",
+                time: "13:00 – 14:00",
+                title: "«English Brain Lab: Create Your Dreamland»",
+                format: "Білім сайысы",
+                gradeDisplay: "7 сынып",
+                gradeGroups: ["5-7"],
+                location: "220 кабинет",
+                responsible: "Омиржанова К.К.",
+                values: ["Бірлік және ынтымақ"]
+            },
+            {
+                id: 21,
+                date: "25.11",
+                dateFull: "25 қараша • Сәрсенбі",
+                time: "15:00 – 16:00",
+                title: "«English Fun Games»",
+                format: "Танымдық сайыс",
+                gradeDisplay: "3 сынып",
+                gradeGroups: ["3-4"],
+                location: "207 кабинет",
+                responsible: "Аронова А.Д.",
+                values: ["Бірлік және ынтымақ"]
+            },
+            {
+                id: 22,
+                date: "25.11",
+                dateFull: "25 қараша • Сәрсенбі",
+                time: "12:00 – 13:00",
+                title: "«Brainy Kids»",
+                format: "Викторина",
+                gradeDisplay: "5 сынып",
+                gradeGroups: ["5-7"],
+                location: "203 кабинет",
+                responsible: "Қазбек А.О.",
+                values: ["Әділдік және жауапкершілік"]
+            },
+            {
+                id: 23,
+                date: "26.11",
+                dateFull: "26 қараша • Бейсенбі",
+                time: "12:35 – 13:20",
+                title: "«Тарихи лотерея»",
+                format: "Зияткерлік ойын",
+                gradeDisplay: "8 сынып",
+                gradeGroups: ["8-9"],
+                location: "216 кабинет",
+                responsible: "Ахметбекова А.С., Есенғали Д.Қ.",
+                values: ["Тәуелсіздік және отаншылдық"]
+            },
+            {
+                id: 24,
+                date: "27.11",
+                dateFull: "27 қараша • Жұма",
+                time: "13:30 – 14:30",
+                title: "Қоғамдық-гуманитарлық пәндер декадасының салтанатты жабылуы",
+                format: "Қорытындылау, марапаттау рәсімі және концерттік бағдарлама",
+                gradeDisplay: "5–11 сынып",
+                gradeGroups: ["5-7", "8-9", "10-11"],
+                location: "Мәжіліс залы",
+                responsible: "ӘБ мұғалімдері",
+                values: ["Бірлік және ынтымақ", "Әділдік және жауапкершілік"],
+                isHighlight: true
+            }
+        ];
+
+        // Справочники для фильтров
+        const dateOptions = [
+            { id: "all", label: "Барлығы", sub: "24 іс-шара" },
+            { id: "16.11", label: "16.11", sub: "Дс" },
+            { id: "17.11", label: "17.11", sub: "Сс" },
+            { id: "18.11", label: "18.11", sub: "Ср" },
+            { id: "19.11", label: "19.11", sub: "Бс" },
+            { id: "20.11", label: "20.11", sub: "Жм" },
+            { id: "23.11", label: "23.11", sub: "Дс" },
+            { id: "24.11", label: "24.11", sub: "Сс" },
+            { id: "25.11", label: "25.11", sub: "Ср" },
+            { id: "26.11", label: "26.11", sub: "Бс" },
+            { id: "27.11", label: "27.11", sub: "Жм" }
+        ];
+
+        const gradeOptions = [
+            { id: "all", label: "Барлығы" },
+            { id: "3-4", label: "Бастауыш (3–4 сынып)" },
+            { id: "5-7", label: "5–7 сынып" },
+            { id: "8-9", label: "8–9 сынып" },
+            { id: "10-11", label: "10–11 сынып" },
+            { id: "teachers", label: "Мұғалімдер" }
+        ];
+
+        const valueOptions = [
+            { id: "all", label: "Барлығы" },
+            { id: "Бірлік және ынтымақ", label: "Бірлік және ынтымақ" },
+            { id: "Жасампаздық және жаңашылдық", label: "Жасампаздық және жаңашылдық" },
+            { id: "Еңбекқорлық және кәсіби біліктілік", label: "Еңбекқорлық және кәсіби біліктілік" },
+            { id: "Тәуелсіздік және отаншылдық", label: "Тәуелсіздік және отаншылдық" },
+            { id: "Әділдік және жауапкершілік", label: "Әділдік және жауапкершілік" }
+        ];
+
+        // Цветовые бейджи для ценностей
+        const valueStyles = {
+            "Бірлік және ынтымақ": "bg-emerald-50 text-emerald-800 border-emerald-200",
+            "Жасампаздық және жаңашылдық": "bg-amber-50 text-amber-800 border-amber-200",
+            "Еңбекқорлық және кәсіби біліктілік": "bg-sky-50 text-sky-800 border-sky-200",
+            "Тәуелсіздік және отаншылдық": "bg-teal-50 text-teal-800 border-teal-200",
+            "Әділдік және жауапкершілік": "bg-indigo-50 text-indigo-800 border-indigo-200"
+        };
+
+        // Состояние приложения
+        let state = {
+            date: "all",
+            grade: "all",
+            value: "all",
+            search: "",
+            view: "cards" // 'cards' | 'table'
+        };
+
+        // Чтение параметров из URL при загрузке (чтобы можно было делиться ссылкой с уже выбранным фильтром)
+        function loadStateFromURL() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                if (params.get("date") && dateOptions.some(d => d.id === params.get("date"))) {
+                    state.date = params.get("date");
+                }
+                if (params.get("grade") && gradeOptions.some(g => g.id === params.get("grade"))) {
+                    state.grade = params.get("grade");
+                }
+                if (params.get("value") && valueOptions.some(v => v.id === params.get("value"))) {
+                    state.value = params.get("value");
+                }
+                if (params.get("q")) {
+                    state.search = params.get("q");
+                    document.getElementById("search-input").value = state.search;
+                }
+                if (params.get("view") === "table") {
+                    state.view = "table";
+                }
+            } catch (e) {
+                console.warn("URL state parsing skipped:", e);
+            }
+        }
+
+        // Обновление URL без перезагрузки страницы
+        function syncURLWithState() {
+            try {
+                const url = new URL(window.location.href);
+                if (state.date !== "all") url.searchParams.set("date", state.date);
+                else url.searchParams.delete("date");
+
+                if (state.grade !== "all") url.searchParams.set("grade", state.grade);
+                else url.searchParams.delete("grade");
+
+                if (state.value !== "all") url.searchParams.set("value", state.value);
+                else url.searchParams.delete("value");
+
+                if (state.search.trim() !== "") url.searchParams.set("q", state.search.trim());
+                else url.searchParams.delete("q");
+
+                if (state.view !== "cards") url.searchParams.set("view", state.view);
+                else url.searchParams.delete("view");
+
+                window.history.replaceState({}, "", url.toString());
+            } catch (e) {
+                // Игнорируем в средах с ограниченным history API
+            }
+        }
+
+        // Рендер кнопок фильтров
+        function renderFilters() {
+            // 1. Даты
+            const dateContainer = document.getElementById("date-filters");
+            dateContainer.innerHTML = dateOptions.map(opt => {
+                const isActive = state.date === opt.id;
+                return `
+                    <button 
+                        onclick="selectDate('${opt.id}')" 
+                        class="shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition flex flex-col items-center min-w-[64px] border cursor-pointer ${
+                            isActive 
+                            ? 'bg-emerald-900 text-white border-emerald-900 shadow-sm' 
+                            : 'bg-slate-50 hover:bg-emerald-50/70 text-slate-700 border-slate-200/80'
+                        }"
+                    >
+                        <span class="font-bold">${opt.label}</span>
+                        <span class="text-[10px] ${isActive ? 'text-gold-300' : 'text-slate-400'}">${opt.sub}</span>
+                    </button>
+                `;
+            }).join("");
+
+            // 2. Классы
+            const gradeContainer = document.getElementById("grade-filters");
+            gradeContainer.innerHTML = gradeOptions.map(opt => {
+                const isActive = state.grade === opt.id;
+                return `
+                    <button 
+                        onclick="selectGrade('${opt.id}')" 
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition border cursor-pointer ${
+                            isActive 
+                            ? 'bg-gold-500 text-slate-950 border-gold-500 font-semibold shadow-sm' 
+                            : 'bg-slate-50 hover:bg-gold-50 text-slate-700 border-slate-200/80'
+                        }"
+                    >
+                        ${opt.label}
+                    </button>
+                `;
+            }).join("");
+
+            // 3. Ценности
+            const valueContainer = document.getElementById("value-filters");
+            valueContainer.innerHTML = valueOptions.map(opt => {
+                const isActive = state.value === opt.id;
+                return `
+                    <button 
+                        onclick="selectValue('${opt.id}')" 
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition border cursor-pointer ${
+                            isActive 
+                            ? 'bg-emerald-800 text-white border-emerald-800 shadow-sm' 
+                            : 'bg-slate-50 hover:bg-emerald-50 text-slate-700 border-slate-200/80'
+                        }"
+                    >
+                        ${opt.label}
+                    </button>
+                `;
+            }).join("");
+
+            // Показ/скрытие кнопки сброса фильтров
+            const isFiltered = state.date !== "all" || state.grade !== "all" || state.value !== "all" || state.search.trim() !== "";
+            const resetBtn = document.getElementById("reset-filters-btn");
+            if (isFiltered) {
+                resetBtn.classList.remove("hidden");
+                resetBtn.classList.add("inline-flex");
+            } else {
+                resetBtn.classList.add("hidden");
+                resetBtn.classList.remove("inline-flex");
+            }
+
+            // Показ/скрытие крестика в поиске
+            const clearSearchBtn = document.getElementById("clear-search-btn");
+            if (state.search.length > 0) {
+                clearSearchBtn.classList.remove("hidden");
+            } else {
+                clearSearchBtn.classList.add("hidden");
+            }
+        }
+
+        // Фильтрация данных
+        function getFilteredEvents() {
+            const query = state.search.toLowerCase().trim();
+            return eventsData.filter(item => {
+                // Фильтр по дате (№2 отображается 16.11 или при выборе "Барлығы", а также если ищут)
+                const matchDate = state.date === "all" || item.date === state.date;
+                
+                // Фильтр по классам
+                const matchGrade = state.grade === "all" || item.gradeGroups.includes(state.grade);
+                
+                // Фильтр по ценностям
+                const matchValue = state.value === "all" || item.values.includes(state.value);
+                
+                // Поиск по тексту
+                const matchSearch = !query || 
+                    item.title.toLowerCase().includes(query) ||
+                    item.format.toLowerCase().includes(query) ||
+                    item.location.toLowerCase().includes(query) ||
+                    item.responsible.toLowerCase().includes(query) ||
+                    item.gradeDisplay.toLowerCase().includes(query) ||
+                    String(item.id) === query;
+
+                return matchDate && matchGrade && matchValue && matchSearch;
+            });
+        }
+
+        // Основная функция отрисовки списка мероприятий
+        function renderEvents() {
+            const filtered = getFilteredEvents();
+            const countEl = document.getElementById("results-count");
+            const cardsContainer = document.getElementById("cards-container");
+            const tableContainer = document.getElementById("table-container");
+            const tableBody = document.getElementById("table-body");
+            const emptyState = document.getElementById("empty-state");
+            const summaryEl = document.getElementById("active-filter-summary");
+
+            countEl.textContent = filtered.length;
+
+            // Текстовая сводка активных фильтров
+            let summaryParts = [];
+            if (state.date !== "all") summaryParts.push(`Күні: ${state.date}`);
+            if (state.grade !== "all") {
+                const gObj = gradeOptions.find(g => g.id === state.grade);
+                if (gObj) summaryParts.push(gObj.label);
+            }
+            if (state.value !== "all") summaryParts.push(`«${state.value}»`);
+            summaryEl.textContent = summaryParts.length > 0 ? `Сүзгі: ${summaryParts.join(" • ")}` : "";
+
+            if (filtered.length === 0) {
+                cardsContainer.classList.add("hidden");
+                tableContainer.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+
+            if (state.view === "cards") {
+                tableContainer.classList.add("hidden");
+                cardsContainer.classList.remove("hidden");
+
+                // Группировка по датам для аккуратных заголовков дней
+                const groupedByDate = {};
+                filtered.forEach(ev => {
+                    if (!groupedByDate[ev.date]) {
+                        groupedByDate[ev.date] = {
+                            dateFull: ev.dateFull,
+                            events: []
+                        };
+                    }
+                    groupedByDate[ev.date].events.push(ev);
+                });
+
+                cardsContainer.innerHTML = Object.keys(groupedByDate).map(dateKey => {
+                    const group = groupedByDate[dateKey];
+                    const cardsHTML = group.events.map(ev => createEventCardHTML(ev)).join("");
+                    
+                    return `
+                        <div class="space-y-3.5">
+                            <!-- Заголовок дня -->
+                            <div class="flex items-center gap-3">
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-900 text-white text-xs sm:text-sm font-bold shadow-sm">
+                                    <i data-lucide="calendar-days" class="w-4 h-4 text-gold-300"></i>
+                                    <span>${group.dateFull}</span>
+                                </div>
+                                <div class="h-px bg-slate-200 flex-grow"></div>
+                                <span class="text-xs font-medium text-slate-400">${group.events.length} іс-шара</span>
+                            </div>
+
+                            <!-- Сетка карточек дня -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${cardsHTML}
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+            } else {
+                cardsContainer.classList.add("hidden");
+                tableContainer.classList.remove("hidden");
+
+                tableBody.innerHTML = filtered.map(ev => {
+                    const valuesBadges = ev.values.map(val => {
+                        const style = valueStyles[val] || "bg-slate-100 text-slate-700 border-slate-200";
+                        return `<span class="inline-block px-2 py-0.5 rounded-md text-[11px] font-medium border ${style}">${val}</span>`;
+                    }).join(" ");
+
+                    return `
+                        <tr class="hover:bg-emerald-50/40 transition align-top ${ev.isHighlight ? 'bg-gold-50/50' : ''}">
+                            <td class="py-3.5 px-4 font-bold text-emerald-900">№${ev.id}</td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="font-bold text-slate-800">${ev.dateTextOverride || ev.date}</div>
+                                <div class="text-xs text-slate-500 mt-0.5 whitespace-normal">${ev.time}</div>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <div class="font-bold text-slate-900 leading-snug">${ev.title}</div>
+                                <div class="text-xs text-emerald-800 font-medium mt-1">${ev.format}</div>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <div class="inline-flex items-center gap-1 text-xs font-semibold text-slate-800 bg-slate-100 px-2 py-1 rounded-md">
+                                    <i data-lucide="users" class="w-3 h-3 text-gold-600"></i>
+                                    <span>${ev.gradeDisplay}</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-xs text-slate-600 mt-1.5">
+                                    <i data-lucide="map-pin" class="w-3 h-3 text-emerald-700 shrink-0"></i>
+                                    <span>${ev.location}</span>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <div class="text-xs font-medium text-slate-800 mb-1.5">${ev.responsible}</div>
+                                <div class="flex flex-wrap gap-1">${valuesBadges}</div>
+                            </td>
+                        </tr>
+                    `;
+                }).join("");
+            }
+
+            // Повторная инициализация иконок Lucide после обновления DOM
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Генерация HTML одной карточки мероприятия
+        function createEventCardHTML(ev) {
+            const valuesBadges = ev.values.map(val => {
+                const style = valueStyles[val] || "bg-slate-100 text-slate-700 border-slate-200";
+                return `
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium border ${style}">
+                        <i data-lucide="sparkles" class="w-3 h-3 opacity-75"></i>
+                        <span>${val}</span>
+                    </span>
+                `;
+            }).join("");
+
+            const highlightBorder = ev.isHighlight 
+                ? "border-gold-400 ring-1 ring-gold-400/30 bg-gradient-to-br from-white to-gold-50/40" 
+                : "border-slate-200/90 bg-white hover:border-emerald-700/40";
+
+            return `
+                <article class="event-card rounded-2xl border ${highlightBorder} p-4 sm:p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-4">
+                    <div>
+                        <!-- Верхняя строка карточки: Номер + Дата/Время + Аудитория -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-flex items-center justify-center px-2.5 py-1 rounded-lg bg-emerald-950 text-gold-300 text-xs font-extrabold tracking-wide">
+                                    №${ev.id}
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-700 shrink-0"></i>
+                                    <span>${ev.dateTextOverride ? `${ev.dateTextOverride} • ` : ''}${ev.time}</span>
+                                </span>
+                            </div>
+
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gold-100/80 text-gold-700 border border-gold-200 text-xs font-semibold">
+                                <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                                <span>${ev.gradeDisplay}</span>
+                            </span>
+                        </div>
+
+                        <!-- Название и формат -->
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug mb-1.5">
+                            ${ev.title}
+                        </h3>
+                        <p class="text-xs sm:text-sm text-emerald-800 font-medium flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>
+                            <span>${ev.format}</span>
+                        </p>
+                    </div>
+
+                    <!-- Нижняя часть карточки: Место, Ответственный, Ценности -->
+                    <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+                            <div class="flex items-start gap-1.5">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-emerald-700 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Өткізу орны</span>
+                                    <span class="font-semibold text-slate-800">${ev.location}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-1.5">
+                                <i data-lucide="user-check" class="w-4 h-4 text-gold-600 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Жауапты</span>
+                                    <span class="font-semibold text-slate-800">${ev.responsible}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                            ${valuesBadges}
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Обработчики выбора фильтров
+        function selectDate(dateId) {
+            state.date = dateId;
+            updateUI();
+        }
+
+        function selectGrade(gradeId) {
+            state.grade = gradeId;
+            updateUI();
+        }
+
+        function selectValue(valueId) {
+            state.value = valueId;
+            updateUI();
+        }
+
+        function clearSearch() {
+            state.search = "";
+            document.getElementById("search-input").value = "";
+            updateUI();
+        }
+
+        function resetAllFilters() {
+            state.date = "all";
+            state.grade = "all";
+            state.value = "all";
+            state.search = "";
+            document.getElementById("search-input").value = "";
+            updateUI();
+            showToast("Барлық сүзгілер тазартылды");
+        }
+
+        function setViewMode(mode) {
+            state.view = mode;
+            const cardsBtn = document.getElementById("view-cards-btn");
+            const tableBtn = document.getElementById("view-table-btn");
+
+            if (mode === "cards") {
+                cardsBtn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white text-emerald-900 shadow-sm transition cursor-pointer";
+                tableBtn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer";
+            } else {
+                tableBtn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white text-emerald-900 shadow-sm transition cursor-pointer";
+                cardsBtn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer";
+            }
+
+            syncURLWithState();
+            renderEvents();
+        }
+
+        function updateUI() {
+            syncURLWithState();
+            renderFilters();
+            renderEvents();
+        }
+
+        // Слушатель ввода в поле поиска
+        document.getElementById("search-input").addEventListener("input", (e) => {
+            state.search = e.target.value;
+            updateUI();
+        });
+
+        // Функция копирования ссылки в буфер обмена (с fallback через execCommand)
+        function copyShareLink() {
+            const shareUrl = window.location.href;
+            
+            const tempInput = document.createElement("textarea");
+            tempInput.value = shareUrl;
+            tempInput.style.position = "fixed";
+            tempInput.style.opacity = "0";
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+
+            try {
+                const successful = document.execCommand("copy");
+                if (successful) {
+                    showToast("Сілтеме алмасу буферіне көшірілді! WhatsApp немесе Telegram-ға жібере аласыз.");
+                } else if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        showToast("Сілтеме сәтті көшірілді!");
+                    });
+                }
+            } catch (err) {
+                showToast("Сілтемені мекенжай жолағынан көшіріңіз");
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Всплывающее уведомление (Toast)
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "pointer-events-auto flex items-center gap-2.5 bg-emerald-950 text-white px-4 py-3 rounded-xl shadow-xl border border-gold-400/40 text-xs sm:text-sm max-w-sm transform transition-all duration-300 translate-y-2 opacity-0";
+            toast.innerHTML = `
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-gold-300 shrink-0"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            if (window.lucide) lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                toast.classList.remove("translate-y-2", "opacity-0");
+            });
+
+            setTimeout(() => {
+                toast.classList.add("translate-y-2", "opacity-0");
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Работа с QR-кодом
+        let qrInstance = null;
+
+        function openQrModal() {
+            const modal = document.getElementById("qr-modal");
+            const urlInput = document.getElementById("qr-url-input");
+            const currentUrl = window.location.href;
+            
+            urlInput.value = currentUrl;
+
+            if (window.QRious) {
+                qrInstance = new QRious({
+                    element: document.getElementById("qr-canvas"),
+                    value: currentUrl,
+                    size: 210,
+                    backgroundAlpha: 1,
+                    foreground: "#043927",
+                    background: "#ffffff",
+                    level: "H"
+                });
+            }
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeQrModal() {
+            const modal = document.getElementById("qr-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        function closeQrModalOnBackdrop(event) {
+            if (event.target.id === "qr-modal") {
+                closeQrModal();
+            }
+        }
+
+        function downloadQrCode() {
+            const canvas = document.getElementById("qr-canvas");
+            if (!canvas) return;
+            const link = document.createElement("a");
+            link.download = "Onkundik_Zhospar_2026_QR.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+            showToast("QR-код суреті жүктелді");
+        }
+
+        // Закрытие модального окна по клавише Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeQrModal();
+            }
+        });
+
+        // Инициализация приложения при загрузке страницы
+        window.addEventListener("DOMContentLoaded", () => {
+            loadStateFromURL();
+            if (state.view === "table") {
+                setViewMode("table");
+            }
+            renderFilters();
+            renderEvents();
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
